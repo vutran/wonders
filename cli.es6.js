@@ -1,5 +1,4 @@
 const https = require('https');
-const minimist = require('minimist');
 const pkg = require('./package');
 const Recon = require('./');
 
@@ -42,12 +41,12 @@ const beep = () => {
 };
 
 // creates the program
-const Program = (props) => (
-    <program input={props.input}>
+const Program = () => (
+    <program>
         <command name="search" onAction={search} />
         <command name="beep" onAction={beep} />
         <command name="boop">Boop!</command>
     </program>
 );
 
-Recon.render(<Program input={minimist(process.argv.slice(2))} />, process.stdout);
+Recon.render(<Program />, process.stdout);
