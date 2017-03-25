@@ -26,8 +26,6 @@ const searchRepo = (q) => new Promise((resolve, reject) => {
     });
 });
 
-
-// search
 const search = (args) => {
     const q = args[1];
     return searchRepo(q)
@@ -37,12 +35,18 @@ const search = (args) => {
             log += repos.join('\n');
             return log;
         });
-}
+};
+
+const beep = () => {
+    return 'Beep!';
+};
 
 // creates the program
 const Program = (props) => (
     <program input={props.input}>
         <command name="search" onAction={search} />
+        <command name="beep" onAction={beep} />
+        <command name="boop">Boop!</command>
     </program>
 );
 

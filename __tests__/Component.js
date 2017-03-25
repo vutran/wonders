@@ -14,7 +14,7 @@ describe('Component', () => {
         expect(element).toEqual(jsxElement);
         expect(element)
             .toEqual({
-                type: 'command',
+                nodeName: 'command',
                 props: null,
                 children: [
                     'Hello, world!',
@@ -31,11 +31,11 @@ describe('Component', () => {
         );
         expect(Program)
             .toEqual({
-                type: 'program',
+                nodeName: 'program',
                 props: null,
                 children: [
                     {
-                        type: 'command',
+                        nodeName: 'command',
                         props: {
                             name: 'this',
                         },
@@ -44,7 +44,7 @@ describe('Component', () => {
                         ],
                     },
                     {
-                        type: 'command',
+                        nodeName: 'command',
                         props: {
                             name: 'that',
                         },
