@@ -1,17 +1,25 @@
 import Recon from '../';
 
 describe('Component', () => {
-    it('should return the value for a purely functional command.', () => {
-        const cmd = (props) =>
-            `Hello, ${props.name}!`;
-        expect(
-            cmd({ name: 'Vu' }),
-        ).toBe('Hello, Vu!');
+    it('should create a pure functional command.', () => {
+        const cmd = (props) => `Hello, ${props.name}!`;
+        const element = cmd({ name: 'Vu' });
+        expect(element)
+            .toBe('Hello, Vu!');
     });
 
-    it('return the value for the command.', () => {
-        const output = <command>Hello, world!</command>;
-        expect(output).toBe('Hello, world!');
+    it('should create a command with/without JSX.', () => {
+        const element = Recon.Component('command', null, 'Hello, world!');
+        const jsxElement = <command>Hello, world!</command>;
+        expect(element).toEqual(jsxElement);
+        expect(element)
+            .toEqual({
+                type: 'command',
+                props: null,
+                children: [
+                    'Hello, world!',
+                ],
+            });
     });
 
     it('should create a program with multiple commands.', () => {
@@ -21,19 +29,30 @@ describe('Component', () => {
                 <command name="that">That!</command>
             </program>
         );
-        expect(<Program />).toBeNull();
-    });
-
-    // @TODO
-    it('should return the value for the given command.', () => {
-        const Program = (
-            <program>
-                <command name="this">This!</command>
-                <command name="that">That!</command>
-            </program>
-        );
-        console.log(Program);
-        //expect(<Program input="this" />).toBe('This!');
-        //expect(<Program input="that" />).toBe('That!');
+        expect(Program)
+            .toEqual({
+                type: 'program',
+                props: null,
+                children: [
+                    {
+                        type: 'command',
+                        props: {
+                            name: 'this',
+                        },
+                        children: [
+                            'This!',
+                        ],
+                    },
+                    {
+                        type: 'command',
+                        props: {
+                            name: 'that',
+                        },
+                        children: [
+                            'That!',
+                        ],
+                    },
+                ],
+            });
     });
 });

@@ -6,7 +6,7 @@
   "author": "Vu Tran <vu@vu-tran.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --verbose --coverage"
   },
   "dependencies": {
     "minimist": "^1.2.0"
