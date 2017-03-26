@@ -3,6 +3,8 @@
 > Build command-line applications with JSX.
 
 ```js
+#!/usr/bin/env node
+
 import Recon from 'recon';
 
 const search = () => {
