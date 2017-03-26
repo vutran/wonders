@@ -1,13 +1,13 @@
 const https = require('https');
 const pkg = require('./package');
-const Recon = require('./');
+const Wonders = require('./');
 
 // helpers
 const searchRepo = (q) => new Promise((resolve, reject) => {
     const url = `https://api.github.com/search/repositories?q=${q}`;
     const opts = {
         headers: {
-            'User-Agent': 'recon-demo',
+            'User-Agent': 'wonders-demo',
         },
         hostname: 'api.github.com',
         path: `/search/repositories?q=${q}`,
@@ -49,4 +49,4 @@ const Program = () => (
     </program>
 );
 
-Recon.render(<Program />, process.stdout);
+Wonders.render(<Program />, process.stdout);

@@ -1,5 +1,5 @@
 import { Writable } from 'stream';
-import Recon from '../';
+import Wonders from '../';
 
 jest.mock('minimist');
 
@@ -22,7 +22,7 @@ describe('render', () => {
         const s = new Writable();
         s.write = jest.fn();
 
-        const r = () => Recon.render(<Program />, s);
+        const r = () => Wonders.render(<Program />, s);
         expect(r).toThrowError('Missing input.');
     });
 
@@ -34,7 +34,7 @@ describe('render', () => {
         const s = new Writable();
         s.write = jest.fn();
 
-        await Recon.render(<Program />, s);
+        await Wonders.render(<Program />, s);
         expect(s.write).toHaveBeenCalledWith('Beep!');
     });
 
@@ -46,7 +46,7 @@ describe('render', () => {
         const s = new Writable();
         s.write = jest.fn();
 
-        await Recon.render(<Program />, s);
+        await Wonders.render(<Program />, s);
         expect(s.write).toHaveBeenCalledWith('Boop!');
     });
 
@@ -58,7 +58,7 @@ describe('render', () => {
         const s = new Writable();
         s.write = jest.fn();
 
-        await Recon.render(<Program />, s);
+        await Wonders.render(<Program />, s);
         expect(s.write).toHaveBeenCalledWith('Deployed!');
     });
 });

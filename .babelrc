@@ -3,7 +3,7 @@
     "plugins": [
         "transform-async-to-generator",
         ["transform-react-jsx", {
-            "pragma": "Recon.Component"
+            "pragma": "Wonders.Component"
         }],
     ]
 }

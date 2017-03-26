@@ -1,4 +1,4 @@
-import Recon from '../';
+import Wonders from '../';
 
 describe('Component', () => {
     it('should create a pure functional command.', () => {
@@ -9,7 +9,7 @@ describe('Component', () => {
     });
 
     it('should create a command with/without JSX.', () => {
-        const element = Recon.Component('command', null, 'Hello, world!');
+        const element = Wonders.Component('command', null, 'Hello, world!');
         const jsxElement = <command>Hello, world!</command>;
         expect(element).toEqual(jsxElement);
         expect(element)

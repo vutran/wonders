@@ -1,11 +1,11 @@
-# recon
+# Wonders
 
 > Build command-line applications with JSX.
 
 ```js
 #!/usr/bin/env node
 
-import Recon from 'recon';
+import Wonders from 'wonders';
 
 const search = () => {
     return new Promise((resolve) => {
@@ -30,7 +30,7 @@ const Program = () => (
 );
 
 // render to the `stdout` stream
-Recon.render(<Program />, process.stdout);
+Wonders.render(<Program />, process.stdout);
 ```
 
 ```bash
