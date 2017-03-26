@@ -2,6 +2,10 @@
 
 > Build command-line applications with JSX.
 
+- [Basic demo](https://github.com/vutran/wonders-demo)
+
+## Example
+
 ```js
 #!/usr/bin/env node
 
