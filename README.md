@@ -8,9 +8,12 @@
 import Recon from 'recon';
 
 const search = () => {
-    // perform async tasks
-    // and return a Promise
-    return doSomeAsyncTask().then('Deployed!');
+    return new Promise((resolve) => {
+        // perform async tasks...
+        setTimeout(() => {
+            resolve('Deployed!');
+        }, 5000);
+    });
 }
 
 const beep = () => {
@@ -29,7 +32,6 @@ const Program = () => (
 // render to the `stdout` stream
 Recon.render(<Program />, process.stdout);
 ```
-
 
 ```bash
 $ ./cli.js deploy
