@@ -7,7 +7,7 @@
 
 import Wonders from 'wonders';
 
-const search = () => {
+const deploy = () => {
     return new Promise((resolve) => {
         // perform async tasks...
         setTimeout(() => {
@@ -23,7 +23,7 @@ const beep = () => {
 
 const Program = () => (
     <program>
-        <command name="deploy" onAction={search} />
+        <command name="deploy" onAction={deploy} />
         <command name="beep" onAction={beep} />
         <command name="boop">Boop!</command>
     </program>
