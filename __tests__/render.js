@@ -1,29 +1,64 @@
+import { Writable } from 'stream';
 import Recon from '../';
 
+jest.mock('minimist');
+
 describe('render', () => {
-    it('should create a program with a default input.', () => {
-        const Program = (props) => (
-            <program input={props.input}>
-                <command name="this">This!</command>
-                <command name="that">That!</command>
-            </program>
-        );
-        expect(Recon.render(<Program input="this" />)).toBe('This!');
-        expect(Recon.render(<Program input="that" />)).toBe('That!');
+    const minimist = require('minimist');
+    const deploy = () => new Promise((resolve) => {
+        setTimeout(() => resolve('Deployed!'), 1000);
+    });
+    const Program = () => (
+        <program>
+            <command name="deploy" onAction={deploy} />
+            <command name="beep">Beep!</command>
+            <command name="boop">Boop!</command>
+        </program>
+    );
+
+    it('should throw a missing input error.', async () => {
+        minimist.__setReturnValue([]);
+
+        const s = new Writable();
+        s.write = jest.fn();
+
+        const r = () => Recon.render(<Program />, s);
+        expect(r).toThrowError('Missing input.');
     });
 
-    it('should create a program that runs a task.', () => {
-        const runTasks = () => 'Running tasks...';
-        const help = () => 'Displaying help';
+    it('should run the beep command.', async () => {
+        minimist.__setReturnValue([
+            'beep',
+        ]);
 
-        const Program = (props) => (
-            <program input={props.input}>
-                <command name="version" onAction={runTasks} />
-                <command name="help" onAction={help} />
-            </program>
-        );
+        const s = new Writable();
+        s.write = jest.fn();
 
-        expect(Recon.render(<Program input="version" />)).toBe('Running tasks...');
-        expect(Recon.render(<Program input="help" />)).toBe('Displaying help');
+        await Recon.render(<Program />, s);
+        expect(s.write).toHaveBeenCalledWith('Beep!');
+    });
+
+    it('should run the boop command.', async () => {
+        minimist.__setReturnValue([
+            'boop',
+        ]);
+
+        const s = new Writable();
+        s.write = jest.fn();
+
+        await Recon.render(<Program />, s);
+        expect(s.write).toHaveBeenCalledWith('Boop!');
+    });
+
+    it('should run the deploy command.', async () => {
+        minimist.__setReturnValue([
+            'deploy',
+        ]);
+
+        const s = new Writable();
+        s.write = jest.fn();
+
+        await Recon.render(<Program />, s);
+        expect(s.write).toHaveBeenCalledWith('Deployed!');
     });
 });

@@ -22,6 +22,20 @@ describe('Component', () => {
             });
     });
 
+    it('should create a command with props', () => {
+        const element = <command name="foo">Beep!</command>;
+        expect(element)
+            .toEqual({
+                nodeName: 'command',
+                props: {
+                    name: 'foo',
+                },
+                children: [
+                    'Beep!',
+                ],
+            });
+    });
+
     it('should create a program with multiple commands.', () => {
         const Program = (
             <program>
