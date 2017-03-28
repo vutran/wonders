@@ -4,6 +4,6 @@
         "transform-async-to-generator",
         ["transform-react-jsx", {
             "pragma": "Wonders.Component"
-        }],
+        }]
     ]
 }

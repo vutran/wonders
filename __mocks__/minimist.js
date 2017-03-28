@@ -1,8 +1,6 @@
 let __mockValue = null;
 
-const minimist = () => ({
-    _: __mockValue,
-});
+const minimist = () => __mockValue;
 
 /**
  * @param {Array<String>} inputs

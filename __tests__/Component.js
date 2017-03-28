@@ -23,12 +23,13 @@ describe('Component', () => {
     });
 
     it('should create a command with props', () => {
-        const element = <command name="foo">Beep!</command>;
+        const element = <command name="foo" description="This is a sample description.">Beep!</command>;
         expect(element)
             .toEqual({
                 nodeName: 'command',
                 props: {
                     name: 'foo',
+                    description: 'This is a sample description.',
                 },
                 children: [
                     'Beep!',
