@@ -9,6 +9,8 @@
     "lib"
   ],
   "scripts": {
+    "lint": "prettier --single-quote --trailing-comma=es5 --print-width=90 --tab-width=4 --write 'lib/*.js' 'index.js'",
+    "precommit": "npm run lint",
     "start": "./cli.js",
     "test": "jest --verbose --coverage"
   },
@@ -20,6 +22,8 @@
     "babel-plugin-transform-react-jsx": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
-    "jest": "^19.0.2"
+    "husky": "^0.13.3",
+    "jest": "^19.0.2",
+    "prettier": "^0.22.0"
   }
 }
