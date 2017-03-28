@@ -30,7 +30,7 @@ const beep = () => {
 }
 
 const Program = () => (
-    <program>
+    <program version="1.0.0" parse={process.argv}>
         <command name="echo" description="Echoes a message" onAction={echo} />
         <command name="deploy" description="Deploy an app" onAction={deploy} />
         <command name="beep" description="Prints Beep!" onAction={beep} />

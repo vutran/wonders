@@ -4,6 +4,7 @@ import Wonders from '../';
 jest.mock('minimist');
 
 describe('render', () => {
+    const argv = ['/usr/local/bin/node', __filename];
     const minimist = require('minimist');
     const echo = (args, options) => new Promise((resolve) => {
         setTimeout(() => resolve(`Echo: ${options.name}`), 1000);
@@ -12,7 +13,7 @@ describe('render', () => {
         setTimeout(() => resolve('Deployed!'), 1000);
     });
     const Program = () => (
-        <program>
+        <program version="1.0.0" parse={argv}>
             <command name="echo" onAction={echo} />
             <command name="deploy" onAction={deploy} />
             <command name="beep">Beep!</command>
