@@ -1,5 +1,7 @@
 import { Writable } from 'stream';
 import Wonders from '../';
+import { flatten } from '../lib/utils';
+import { walk } from '../lib/render';
 
 jest.mock('minimist');
 
@@ -7,10 +9,10 @@ describe('render', () => {
     const argv = ['/usr/local/bin/node', __filename];
     const minimist = require('minimist');
     const echo = (args, options) => new Promise((resolve) => {
-        setTimeout(() => resolve(`Echo: ${options.name}`), 1000);
+        setTimeout(() => resolve(`Echo: ${options.name}`), 100);
     });
     const deploy = () => new Promise((resolve) => {
-        setTimeout(() => resolve('Deployed!'), 1000);
+        setTimeout(() => resolve('Deployed!'), 100);
     });
     const Program = () => (
         <program version="1.0.0" parse={argv}>
@@ -30,6 +32,7 @@ describe('render', () => {
 
         const s = new Writable();
         s.write = jest.fn();
+
 
         await Wonders.render(<Program />, s);
         expect(s.write).toHaveBeenCalledWith('Beep!');
@@ -91,5 +94,17 @@ describe('render', () => {
 
         await Wonders.render(<Program />, s);
         expect(s.write).toHaveBeenCalledWith('Echo: hello world');
+    });
+
+    it('should render foobar in italics.', () => {
+        const renderedNode = walk(<em>foobar</em>);
+        expect(flatten(renderedNode).join(''))
+            .toEqual('\u001b[3mfoobar\u001b[0m');
+    });
+
+    it('should render foobar in a paragraph.', () => {
+        const renderedNode = walk(<p><em>foobar</em></p>);
+        expect(flatten(renderedNode).join(''))
+            .toEqual('\n\u001b[3mfoobar\u001b[0m\n');
     });
 });

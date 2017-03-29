@@ -70,4 +70,30 @@ describe('component', () => {
                 ],
             });
     });
+
+    it('should create a nested container.', () => {
+        const Program = (
+            <p>
+                <em>foo</em>
+                <em>bar</em>
+            </p>
+        );
+        expect(Program)
+            .toEqual({
+                nodeName: 'p',
+                props: null,
+                children: [
+                    {
+                        nodeName: 'em',
+                        props: null,
+                        children: ['foo'],
+                    },
+                    {
+                        nodeName: 'em',
+                        props: null,
+                        children: ['bar'],
+                    },
+                ],
+            });
+    });
 });
