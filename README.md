@@ -2,7 +2,7 @@
 
 > A JavaScript library for building command-line interfaces with JSX.
 
-**NOTE:** This framework is currently in it's initial stage of development and is still highly experiemental. Not all features are yet to be implemented so please feel free to help contribute towards features, bugs, and documentations where necessary.
+**NOTE:** This framework is currently in it's initial stage of development and is still highly experimental. Not all features are yet to be implemented so please feel free to help contribute towards features, bugs, and documentations where necessary.
 
 ## Install
 
