@@ -1,7 +1,6 @@
 import { Writable } from 'stream';
 import Wonders from '../';
-import { flatten } from '../lib/utils';
-import { walk } from '../lib/render';
+import { renderTree } from '../lib/render';
 
 jest.mock('minimist');
 
@@ -96,15 +95,15 @@ describe('render', () => {
         expect(s.write).toHaveBeenCalledWith('Echo: hello world');
     });
 
-    it('should render foobar in italics.', () => {
-        const renderedNode = walk(<em>foobar</em>);
-        expect(flatten(renderedNode).join(''))
-            .toEqual('\u001b[3mfoobar\u001b[0m');
+    it('should render foobar in bold and italics.', () => {
+        const node = <strong><em>foobar</em></strong>;
+        expect(renderTree(node))
+            .toEqual('\u001b[1m\u001b[3mfoobar\u001b[0m\u001b[0m');
     });
 
     it('should render foobar in a paragraph.', () => {
-        const renderedNode = walk(<p><em>foobar</em></p>);
-        expect(flatten(renderedNode).join(''))
+        const node = <p><em>foobar</em></p>;
+        expect(renderTree(node))
             .toEqual('\n\u001b[3mfoobar\u001b[0m\n');
     });
 });
