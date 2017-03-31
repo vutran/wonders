@@ -94,7 +94,7 @@ Running the script will result with:
 ```
 $ ./cli.js hello
 
-# -> Hello World!
+# -> Hello, World!
 ```
 
 ## Asynchronous Actions
