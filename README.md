@@ -11,10 +11,12 @@
 
 import Wonders from 'wonders';
 
+// can handle flags
 const echo = (args, options) => {
     return 'Echo: ' + options.message;
 }
 
+// can return a Promise that resolves the output
 const deploy = () => {
     return new Promise((resolve) => {
         // perform async tasks...
@@ -24,9 +26,17 @@ const deploy = () => {
     });
 }
 
+// works as pure fuctional components
 const beep = () => {
     // just return a regular string
     return 'Beep!';
+}
+
+// works with ES6 classes
+class Zap extends Wonders.Component {
+    render() {
+        return 'Zap!';
+    }
 }
 
 const Program = () => (
@@ -35,6 +45,9 @@ const Program = () => (
         <command name="deploy" description="Deploy an app" onAction={deploy} />
         <command name="beep" description="Prints Beep!" onAction={beep} />
         <command name="boop" description="Prints Boop!">Boop!</command>
+        <command name="zap" description="Prints Zap!">
+            <Zap />
+        </command>
     </program>
 );
 
@@ -58,4 +71,8 @@ $ ./cli.js beep
 $ ./cli.js boop
 
 # Boop!
+
+$ ./cli.js zap
+
+# Zap!
 ```
