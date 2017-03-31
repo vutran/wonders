@@ -1,78 +1,177 @@
 # Wonders
 
-> Build command-line applications with JSX.
+> A JavaScript library for building command-line interfaces with JSX.
 
-- [Basic demo](https://github.com/vutran/wonders-demo)
+**NOTE:** This framework is currently in it's initial stage of development and is still highly experiemental. Not all features are yet to be implemented so please feel free to help contribute towards features, bugs, and documentations where necessary.
 
-## Example
+## Install
+
+Install via npm or [yarn](https://yarnpkg.com)
+
+```bash
+$ npm i -S wonders
+
+# or with yarn:
+
+$ yarn add wonders
+```
+
+## Setup
+
+Import `Wonders` in your files.
 
 ```js
+import Wonders from 'wonders';
+
+// Declare the JSX pragma
+/** @jsx Wonders.Component */
+```
+
+Instead of declaring the JSX pragma in each file, it is recommended to set it within your `.babelrc` file.
+
+Note: Make sure to install `babel-plugin-transform-react-jsx`.
+
+```
+{
+    "plugins": [
+        ["transform-react-jsx", {
+            "pragma": "Wonders.Component"
+        }]
+    ]
+}
+```
+
+## Program Layout
+
+A simple `<program/>` will consist of multiple `<commands/>`. These elements are handled internally by the renderer.
+
+A simple structure would look something like this:
+
+```jsx
+const App = (
+    <program version="1.0.0" args={process.argv}>
+        <command name="foo">Foo!</command>
+        <command name="bar">Bar!</command>
+        <command name="baz">Baz!</command>
+    </program>
+);
+```
+
+The example above will only render and execute the `<command name="foo" />`.
+
+```bash
+$ ./cli.js foo
+
+# -> Foo!
+```
+
+## Creating Your First Command Line Application
+
+`Wonders` can render to any stream. For this example, we will be writing to `process.stdout` so our command-line application can work.
+
+We will need to pass the argument list (from the user input) into the `<program />` element.
+
+```jsx
 #!/usr/bin/env node
+
+// file: ./cli.js
 
 import Wonders from 'wonders';
 
-// can handle flags
-const echo = (args, options) => {
-    return 'Echo: ' + options.message;
-}
-
-// can return a Promise that resolves the output
-const deploy = () => {
-    return new Promise((resolve) => {
-        // perform async tasks...
-        setTimeout(() => {
-            resolve('Deployed!');
-        }, 5000);
-    });
-}
-
-// works as pure fuctional components
-const beep = () => {
-    // just return a regular string
-    return 'Beep!';
-}
-
-// works with ES6 classes
-class Zap extends Wonders.Component {
-    render() {
-        return 'Zap!';
-    }
-}
-
-const Program = () => (
-    <program version="1.0.0" parse={process.argv}>
-        <command name="echo" description="Echoes a message" onAction={echo} />
-        <command name="deploy" description="Deploy an app" onAction={deploy} />
-        <command name="beep" description="Prints Beep!" onAction={beep} />
-        <command name="boop" description="Prints Boop!">Boop!</command>
-        <command name="zap" description="Prints Zap!">
-            <Zap />
+const App = (
+    <program args={process.argv}>
+        <command name="hello">
+            Hello, world!
         </command>
     </program>
 );
 
-// render to the `stdout` stream
-Wonders.render(<Program />, process.stdout);
+Wonders.render(<App />, process.stdout);
+```
+
+Running the script will result with:
+
+```
+$ ./cli.js hello
+
+# -> Hello World!
+```
+
+## Asynchronous Actions
+
+`Wonders` supports for rendering output from asynchronous task. Suppose you want to write a script that would deploy something to a remote server. A simple example can be written like so:
+
+```js
+const deploy = () => {
+    return new Promise((resolve) => {
+        // perform remote server deployment
+        setTimeout(() => {
+            // resolve with a message once finished.
+            resolve('Deployed!');
+        }, 5000);
+    });
+};
+
+const App = (
+    <program args={process.argv}>
+        <command name="deploy" onAction={deploy} />
+    </program>
+);
+
+Wonders.render(<App />, process.stdout);
 ```
 
 ```bash
-$ ./cli.js echo foo
-
-# Echo: foo
-
 $ ./cli.js deploy
 
-# Deployed!
-
-$ ./cli.js beep
-
-# Beep!
-
-$ ./cli.js boop
-
-# Boop!
-
-$ ./cli.js zap
-
-# Zap!
+# .... waits 5 seconds
+# -> Deployed!
 ```
+
+## Functional and Class Components
+
+`Wonders` follow the same patterns as [`React`](https://github.com/facebook/react) when building reusable components for your `<command/>`.
+
+The most simplest way to write a component is to write a regular function.
+
+```js
+function beep() {
+    return 'Beep!';
+}
+```
+
+Or as an ES6 class:
+
+```js
+class Boop extends Wonders.Component {
+    render() {
+        return <p>Boop!</p>;
+    }
+}
+```
+
+You can feel free to compose your components, and stylize your output as necessary.
+
+```js
+import Wonders from 'wonders';
+
+export function beep() {
+    return (
+        <div>
+            <p><strong>This is bold text.</strong></p>
+            <p><em>This is italicized text.</em></p>
+            <p><u>This is underlined text.</u></p>
+        </div>
+    );
+}
+```
+
+## Demo Application
+
+See the codebase for a working demo application below:
+
+[https://github.com/vutran/wonders-demo](https://github.com/vutran/wonders-demo)
+
+## LICENSE
+
+MIT © [Vu Tran](https://github.com/vutran/)
