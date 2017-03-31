@@ -81,7 +81,7 @@ import Wonders from 'wonders';
 const App = (
     <program args={process.argv}>
         <command name="hello">
-            Hello, world!
+            Hello, World!
         </command>
     </program>
 );
