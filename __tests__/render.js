@@ -106,4 +106,41 @@ describe('render', () => {
         expect(renderTree(node))
             .toEqual('\n\u001b[3mfoobar\u001b[0m\n');
     });
+
+    it('should render a custom component.', () => {
+        class Foobar extends Wonders.Component {
+            render() {
+                return 'Hello, world';
+            }
+        }
+        expect(renderTree(<Foobar />))
+            .toEqual('Hello, world');
+    });
+
+    it('should a deeply nested custom component.', () => {
+        class ExampleList extends Wonders.Component {
+            render() {
+                return (
+                    <ul>
+                        <BoldListItem>foo</BoldListItem>
+                        <BoldListItem>bar</BoldListItem>
+                    </ul>
+                )
+            }
+        }
+
+        class BoldListItem extends Wonders.Component {
+            render() {
+                return (
+                    <li>
+                        <strong>{this.props.children}</strong>
+                    </li>
+                );
+            }
+        }
+
+        expect(renderTree(<ExampleList />))
+            .toEqual('\t\u2022\u001b[1mfoo\u001b[0m\n\t\u2022\u001b[1mbar\u001b[0m\n\n');
+
+    });
 });
