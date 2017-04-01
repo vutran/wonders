@@ -117,7 +117,7 @@ describe('render', () => {
             .toEqual('Hello, world');
     });
 
-    it('should a deeply nested custom component.', () => {
+    it('should render a deeply nested custom component.', () => {
         class ExampleList extends Wonders.Component {
             render() {
                 return (
