@@ -1,7 +1,7 @@
 {
   "name": "wonders",
   "version": "0.2.0",
-  "description": "> Build CLI apps with React",
+  "description": "Build CLI apps with React",
   "main": "lib/index.js",
   "author": "Vu Tran <vu@vu-tran.com>",
   "license": "MIT",
