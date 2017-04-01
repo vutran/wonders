@@ -5,7 +5,7 @@ describe('<li/>', () => {
     it('should render an <li/> element', () => {
         const node = <li>foobar</li>;
         const output = renderTree(node);
-        expect(output).toEqual('\u2022foobar\n');
+        expect(output).toEqual('\t\u2022foobar\n');
     });
 });
 
