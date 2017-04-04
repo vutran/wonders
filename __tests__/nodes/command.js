@@ -39,6 +39,7 @@ describe('<command/>', () => {
         );
         const output = renderTree(node);
         expect(foo).toHaveBeenCalled();
+        expect(bar).not.toHaveBeenCalled();
         expect(output).toBe('hi foo');
     });
 });
