@@ -15,7 +15,7 @@ describe('component', () => {
         expect(element)
             .toEqual({
                 nodeName: 'command',
-                props: null,
+                props: {},
                 children: [
                     'Hello, world!',
                 ],
@@ -47,7 +47,7 @@ describe('component', () => {
         expect(Program)
             .toEqual({
                 nodeName: 'program',
-                props: null,
+                props: {},
                 children: [
                     {
                         nodeName: 'command',
@@ -81,16 +81,16 @@ describe('component', () => {
         expect(Program)
             .toEqual({
                 nodeName: 'p',
-                props: null,
+                props: {},
                 children: [
                     {
                         nodeName: 'em',
-                        props: null,
+                        props: {},
                         children: ['foo'],
                     },
                     {
                         nodeName: 'em',
-                        props: null,
+                        props: {},
                         children: ['bar'],
                     },
                 ],
