@@ -140,7 +140,7 @@ describe('render', () => {
         }
 
         expect(renderTree(<ExampleList />))
-            .toEqual('\t\u2022\u001b[1mfoo\u001b[0m\n\t\u2022\u001b[1mbar\u001b[0m\n\n');
+            .toEqual('\n\t\u2022\u001b[1mfoo\u001b[0m\n\t\u2022\u001b[1mbar\u001b[0m\n');
 
     });
 });

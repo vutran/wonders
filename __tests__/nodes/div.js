@@ -5,6 +5,6 @@ describe('<div />', () => {
     it('should render a <div /> element', () => {
         const node = <div>foobar</div>;
         const output = renderTree(node);
-        expect(output).toEqual('foobar\n');
+        expect(output).toEqual('\nfoobar');
     });
 });
