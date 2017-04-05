@@ -7,4 +7,22 @@ describe('<div />', () => {
         const output = renderTree(node);
         expect(output).toEqual('\nfoobar');
     });
+
+    it('should be empty if <div /> is empty', () => {
+        const node = <div></div>;
+        const output = renderTree(node);
+        expect(output).toEqual('');
+    });
+
+    it('should add prefix newlines on text nodes', () => {
+        const node = (
+            <div>
+                <div></div>
+                Text 1
+                <div>Text 2</div>
+            </div>
+        );
+        const output = renderTree(node);
+        expect(output).toEqual('\nText 1\nText 2');
+    });
 });
