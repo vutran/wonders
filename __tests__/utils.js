@@ -19,4 +19,17 @@ describe('utils', () => {
         expect(flatten(a))
             .toEqual(['foo', 'bar', 'john', 'smith', null, 2, true, false]);
     });
+
+    it('should flatten a deeply nested array', () => {
+        const a = [
+            1,
+            [ 2 ],
+            [ [ 3 ] ],
+            [ [ [ 4 ] ] ],
+            5,
+            [ [ 6 ] ],
+        ];
+        expect(flatten(a))
+            .toEqual([1, 2, 3, 4, 5, 6]);
+    });
 });
