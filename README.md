@@ -27,17 +27,11 @@ import Wonders from 'wonders';
 /** @jsx Wonders.Component */
 ```
 
-Instead of declaring the JSX pragma in each file, it is recommended to set it within your `.babelrc` file.
-
-Note: Make sure to install `babel-plugin-transform-react-jsx`.
+Instead of declaring the JSX pragma in each file, it is recommended to install [`babel-preset-wonders`](https://www.npmjs.com/package/babel-preset-wonders) which includes all the necessary babel presets and plugins to get you started with `Wonders`.
 
 ```
 {
-    "plugins": [
-        ["transform-react-jsx", {
-            "pragma": "Wonders.Component"
-        }]
-    ]
+    "presets": ["wonders"]
 }
 ```
 
