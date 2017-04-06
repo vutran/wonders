@@ -1,7 +1,10 @@
 {
     "env": {
         "test": {
-            "presets": ["wonders", "jest"]
+            "presets": ["wonders", "jest"],
+            "plugins": [
+                "transform-async-to-generator",
+            ]
         }
     }
 }
