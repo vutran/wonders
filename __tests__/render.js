@@ -19,6 +19,8 @@ describe('render', () => {
             <command name="deploy" onAction={deploy} />
             <command name="beep">Beep!</command>
             <command name="boop">Boop!</command>
+            <command name="num">{1}</command>
+            <command name="bool">{true}</command>
         </program>
     );
 
@@ -49,6 +51,34 @@ describe('render', () => {
 
         await Wonders.render(<Program />, s);
         expect(s.write).toHaveBeenCalledWith('Boop!');
+    });
+
+    it('should run the num command.', async () => {
+        minimist.__setReturnValue({
+            _: [
+                'num',
+            ],
+        });
+
+        const s = new Writable();
+        s.write = jest.fn();
+
+        await Wonders.render(<Program />, s);
+        expect(s.write).toHaveBeenCalledWith('1');
+    });
+
+    it('should run the bool command.', async () => {
+        minimist.__setReturnValue({
+            _: [
+                'bool',
+            ],
+        });
+
+        const s = new Writable();
+        s.write = jest.fn();
+
+        await Wonders.render(<Program />, s);
+        expect(s.write).toHaveBeenCalledWith('true');
     });
 
     it('should run the deploy command.', async () => {
